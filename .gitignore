@@ -1,0 +1,35 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Artefactos generados (ejecutables / paquetes): NO se versionan, se publican como Release ---
+dist/
+build/
+
+# --- Secretos y configuración local (nunca al repositorio) ---
+.env
+*.pem
+*.key
+config.local.*
+
+# --- Datos y exportaciones generadas ---
+/exports/
+*.sqlite3
+
+# --- IDE / sistema operativo ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Terraform / Ansible (si se incorporan) ---
+.terraform/
+*.tfstate
+*.tfstate.*
+*.retry
