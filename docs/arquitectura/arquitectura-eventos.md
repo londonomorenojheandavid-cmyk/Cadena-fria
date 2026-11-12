@@ -1,22 +1,15 @@
-# ECS-DOC-01 · Especificación arquitectónica (resumen)
+# Especificación Arquitectónica — CadenaFría Urabá / FríoPesca
 
-Fuente: Parcial I (prototipo UI/UX y estrategia ágil con Scrum).
-
-* **Estilo:** arquitectura orientada a eventos. Cada cava publica lecturas de temperatura como eventos y el sistema reacciona.
-* **Patrón Adapter** (`adapters.py`): aísla las diferencias entre marcas de termómetros (HU-07).
-* **Patrón Observer** (`observers.py`): `CavaAlmacenamiento` notifica a `AlarmaAudible`, `NotificadorSMS`, `PanelDashboard` y `RegistroEventos` (HU-01, HU-06).
-* **Resiliencia** (HU-08): el fallo de un observador no bloquea a los demás.
-* **Requisitos no funcionales:** umbral crítico > -18 °C; alerta crítica en ≤ 30 s; operación con humedad salina y cortes eléctricos.
+* **Estilo arquitectónico:** Arquitectura en capas en Java (Presentación / Controladores, Servicios de Negocio, Acceso a Datos DAO/Repository y Modelo ORM con Hibernate 6) aplicando los principios SOLID.
+* **Mapeo Objeto-Relacional (ORM):** Hibernate 6 mapea las entidades (`Cooperativa`, `Usuario`, `Cava`, `Producto`, `LoteInventario`, `LecturaTemperatura`, `Alerta`, `Lote`, `Movimiento`) al motor relacional MySQL 8.
+* **Integración Externa:** Consumo de la API REST de **Open-Meteo** para correlacionar la temperatura y humedad ambiente exterior de Urabá (Necoclí / Turbo) con el monitoreo de las cavas y refrigeradores.
+* **Control de Cadena de Frío:** Validación automática de rangos térmicos por lote y umbral crítico de cava (`-18.00 °C`), generando alertas históricas ante desviaciones térmicas.
 
 ```mermaid
 flowchart LR
-  T1[Termómetro marca A] -->|dato crudo| A1[Adapter A]
-  T2[Termómetro marca B] -->|dato crudo| A2[Adapter B]
-  A1 --> L[Lectura]
-  A2 --> L
-  L --> C[CavaAlmacenamiento]
-  C -->|evento de alerta| O1[AlarmaAudible]
-  C --> O2[NotificadorSMS]
-  C --> O3[PanelDashboard]
-  C --> O4[RegistroEventos]
+  UI[Vistas Web Thymeleaf / JSP] --> CTRL[Controladores Web / Servlets]
+  CTRL --> SVC[InventarioService / AlertaService / ClimaService]
+  SVC --> DAO[GenericDAO Hibernate / Spring Data JPA]
+  DAO --> DB[(MySQL 8: cadena_frio / friopesca)]
+  SVC --> API[API Externa Open-Meteo]
 ```

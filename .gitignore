@@ -1,16 +1,14 @@
-# --- Python ---
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-*.egg-info/
-.pytest_cache/
-.coverage
-htmlcov/
-
-# --- Artefactos generados (ejecutables / paquetes): NO se versionan, se publican como Release ---
-dist/
-build/
+# --- Java / Maven ---
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
 
 # --- Secretos y configuración local (nunca al repositorio) ---
 .env
@@ -20,16 +18,13 @@ config.local.*
 
 # --- Datos y exportaciones generadas ---
 /exports/
-*.sqlite3
 
 # --- IDE / sistema operativo ---
 .vscode/
 .idea/
+*.iml
+.settings/
+.classpath
+.project
 .DS_Store
 Thumbs.db
-
-# --- Terraform / Ansible (si se incorporan) ---
-.terraform/
-*.tfstate
-*.tfstate.*
-*.retry

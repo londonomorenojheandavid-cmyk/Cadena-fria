@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cadena_frio?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=America/Bogota</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.show_sql">true</property>
+
+        <mapping class="com.cadenafrio.model.Cooperativa"/>
+        <mapping class="com.cadenafrio.model.Usuario"/>
+        <mapping class="com.cadenafrio.model.Cava"/>
+        <mapping class="com.cadenafrio.model.Producto"/>
+        <mapping class="com.cadenafrio.model.LoteInventario"/>
+        <mapping class="com.cadenafrio.model.LecturaTemperatura"/>
+        <mapping class="com.cadenafrio.model.Alerta"/>
+    </session-factory>
+</hibernate-configuration>
